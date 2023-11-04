@@ -1,0 +1,17 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #ff6600;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+

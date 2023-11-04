@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Image</title>
+</head>
+
+<body>
+    <h1>Upload Image</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap">Snap Photo</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="image" id="image" value="">
+        <input type="submit" value="Upload">
+    </form>
+    {% if predicted_emotion %}
+        <h2>Predicted Emotion: {{ predicted_emotion }}</h2>
+        <img src="{{ plot_path }}" alt="Emotion Plot">
+    {% endif %}
+    <script>
+        var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var snap = document.getElementById("snap");
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                video.srcObject = stream;
+                video.play();
+            });
+        }
+
+        snap.addEventListener("click", function () {
+            context.drawImage(video, 0, 0, 640, 480);
+            document.getElementById("image").value = canvas.toDataURL();
+        });
+
+    </script>
+</body>
+
+</html>
